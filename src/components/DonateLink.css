@@ -1,0 +1,20 @@
+.donate {
+  background-color: #a32480;
+  font-size: large;
+  padding: 1rem;
+  position: absolute;
+  right: 0px;
+  top: 140px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.donate a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.donate:hover {
+  background-color: #7a1a5e;
+  cursor: pointer;
+}

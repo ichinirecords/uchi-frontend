@@ -1,0 +1,29 @@
+.leaflet-popup-content {
+  max-height: 340px;
+  overflow-y: scroll; 
+  padding: 0;
+}
+
+.marker-cluster {
+  background-color: rgb(197, 139, 139);
+}
+
+.marker-cluster div {
+  background-color: rgb(223, 21, 21);
+}
+
+.main-map {
+	height: 75vh;
+	width: 80vw;
+	margin: auto;
+}
+
+.popup-read-more {
+	color: red;
+}
+
+@media only screen and (max-device-width: 1048px) {
+	.main-map {
+		height: 45vh;
+	}
+}

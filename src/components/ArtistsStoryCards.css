@@ -1,0 +1,45 @@
+.cards-wrapper {
+  display: grid;
+  place-items: start center;
+  width: 95%;
+  gap: 2em;
+  margin: auto;
+  margin-top: 2em;
+}
+.react-read-more-read-less-more,
+.react-read-more-read-less {
+  color: #1c555c;
+  text-shadow: 1px 1px 1px white;
+  font-weight: bold;
+  font-family: 'EB Garamond';
+}
+.audio-player {
+  background-image: url('https://snappygoat.com/b/70005f455c019a74aba5c7684440fa91dce9a9ee');
+  background-size: 100% 280px;
+  background-repeat: no-repeat;
+}
+@media only screen and (max-device-width: 768px) {
+  .container .cards-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .card-action .card-img {
+    height: 550px;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 1040px) {
+  .cards-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1041px) and (max-width: 1640px) {
+  .cards-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (min-width: 1641px) {
+  .cards-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
