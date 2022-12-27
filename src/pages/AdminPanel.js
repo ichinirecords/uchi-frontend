@@ -7,6 +7,8 @@ import NewAdmin from "../components/NewAdmin";
 import "./AdminPanel.css";
 import logo from "../logo/uchi logo square jpeg.jpg";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const AdminPanel = ({ user, setUser }) => {
   let history = useHistory();
 
@@ -15,7 +17,9 @@ const AdminPanel = ({ user, setUser }) => {
   
 
   useEffect(() => {
-    fetch("/api/ping", { credentials: "include" })
+    fetch(url+"/ping", {
+      credentials: "include",
+    })
       .then((res) => {
         if (res.status === 401) {
           history.push("/login");
@@ -27,13 +31,15 @@ const AdminPanel = ({ user, setUser }) => {
   }, []);
 
   const handleLogout = () => {
-    fetch("/api/logout").then((res) => {
-      if (res.status != 200) {
-        alert("Could not log out");
-      } else {
-        history.push("/");
+    fetch(url+"/logout").then(
+      (res) => {
+        if (res.status !== 200) {
+          alert("Could not log out");
+        } else {
+          history.push("/");
+        }
       }
-    });
+    );
   };
 
   

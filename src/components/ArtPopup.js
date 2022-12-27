@@ -5,6 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import ReactReadMoreReadLess from "react-read-more-read-less";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -46,18 +48,21 @@ const ArtPopup = ({
             component="img"
             alt={title}
             height="240"
-            image={`/api/media/${content_link}`}
+            image={url+`/api/media/${content_link}`}
             title={title}
           />
         )}
         {content_type === "video" && (
           <video width="100%" height="240" controls>
-            <source src={`/api/media/${content_link}`} type="video/mp4" />
+            <source
+              src={url+`/api/media/${content_link}`}
+              type="video/mp4"
+            />
           </video>
         )}
         {content_type === "audio" && (
           <audio controls style={{ display: "flex", width: "100%" }}>
-            <source src={`/api/media/${content_link}`} />
+            <source src={url+`/api/media/${content_link}`} />
           </audio>
         )}
         <Typography variant="h3" className={classes.title} gutterBottom>

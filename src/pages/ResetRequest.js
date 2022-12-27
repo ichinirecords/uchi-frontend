@@ -9,6 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -38,7 +40,7 @@ const ResetRequest = () => {
   //Send a post api request to login admin
   const handleReset = (e) => {
     e.preventDefault();
-    fetch(`/api/request-reset`, {
+    fetch(url+`/api/request-reset`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

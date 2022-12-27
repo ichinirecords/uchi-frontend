@@ -9,6 +9,8 @@ import ReactReadMoreReadLess from "react-read-more-read-less";
 import { Button } from "@material-ui/core";
 import "./ArtistsStoryCards.css";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -75,12 +77,14 @@ const AdminStoryCards = ({ user, approveMode}) => {
 
   useEffect(() => {
     if (approveMode) {
-      fetch("/api/admin-artwork?status=submitted")
+      fetch(
+      url+"/api/admin-artwork?status=submitted"
+      )
         .then((res) => res.json())
         .then((data) => setSubmittedArtwork(data))
         .catch((err) => console.log(err));
     } else {
-      fetch("/api/admin-artwork")
+    fetch(url+"/api/admin-artwork")
         .then((res) => res.json())
         .then((data) => setSubmittedArtwork(data))
         .catch((err) => console.log(err));
@@ -89,7 +93,7 @@ const AdminStoryCards = ({ user, approveMode}) => {
 
   // function to accept/reject submitted artwork
   const changeStatus = (id, newStatus) => {
-    fetch(`/api/artwork/${id}`, {
+  fetch(url+`/api/artwork/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +114,9 @@ const AdminStoryCards = ({ user, approveMode}) => {
       .then((data) => {
         if (data.success) {
           alert(`Item successfully ${newStatus}`);
-          fetch("/api/artwork?status=submitted")
+          fetch(
+          url+"/api/artwork?status=submitted"
+          )
             .then((res) => res.json())
             .then((data) => setSubmittedArtwork(data))
             .catch((err) => console.log(err));
@@ -122,7 +128,7 @@ const AdminStoryCards = ({ user, approveMode}) => {
 
   // function to delete an artwork item
   const deleteArtwork = (id) => {
-    fetch(`/api/artwork/${id}`, {
+  fetch(url+`/api/artwork/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +144,9 @@ const AdminStoryCards = ({ user, approveMode}) => {
       .then((data) => {
         if (data.success) {
           alert(data.success);
-          fetch("/api/admin-artwork?status=submitted")
+          fetch(
+          url+"/api/admin-artwork?status=submitted"
+          )
             .then((res) => res.json())
             .then((data) => setSubmittedArtwork(data))
             .catch((err) => console.log(err));

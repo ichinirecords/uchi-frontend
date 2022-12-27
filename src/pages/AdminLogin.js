@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from "react-router";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -48,28 +50,29 @@ const AdminLogin = ({setUser}) => {
   //Send a post api request to login admin
   const handleLogin = (e) => {
 	e.preventDefault();
-	fetch(`/api/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({username: username, password: password}),
+	fetch(url+`/login`, {
+    mode: "no-cors",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: username, password: password }),
+  })
+    .then((res) => {
+      if (res.status === 401) {
+        return "Unauthorised";
+      } else {
+        return res.json();
+      }
     })
-    .then(res => {
-		if (res.status === 401) {
-			return "Unauthorised"
-		} else {
-			return res.json()
-		}
-	})
-    .then(data => {
-		if (data.username) {
-			setUser(data);
-			history.push("/admin");
-		} else {
-			alert("incorrect login details");
-		}		
-	})
+    .then((data) => {
+      if (data.username) {
+        setUser(data);
+        history.push("/admin");
+      } else {
+        alert("incorrect login details");
+      }
+    });
   }
 
   const Copyright = () => {

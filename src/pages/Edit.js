@@ -6,6 +6,8 @@ import TextField from "@material-ui/core/TextField";
 import ListItem from "@material-ui/core/ListItem";
 import MapForm from "../components/MapForm";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles((theme) => ({
 	appBar: {
 		position: "absolute",
@@ -53,15 +55,17 @@ const Edit = ({ user, setUser }) => {
 	const classes = useStyles();
 
 	useEffect(() => {
-		fetch("/api/ping", { credentials: "include" })
-			.then((res) => {
-				if (res.status === 401) {
-					history.push("/login");
-				} else {
-					return res.json();
-				}
-			})
-			.then((data) => setUser(data));
+		fetch(url+"/api/ping", {
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.status === 401) {
+          history.push("/login");
+        } else {
+          return res.json();
+        }
+      })
+      .then((data) => setUser(data));
 	}, []);
 
   const validateForm = () => {
@@ -112,13 +116,16 @@ const Edit = ({ user, setUser }) => {
     e.preventDefault();
     const validate = validateForm();
     if (validate) {
-      fetch(`/api/artwork/${location.state.artwork.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...uploadForm }),
-      }).then(() => {
+      fetch(
+        url+`/api/artwork/${location.state.artwork.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...uploadForm }),
+        }
+      ).then(() => {
         alert("Item successfully edited");
         history.push("/admin");
       });
@@ -217,7 +224,7 @@ const Edit = ({ user, setUser }) => {
                     height="240px"
                     width="auto"
                     margin="auto"
-                    src={`/api/media/${uploadForm.content_link}`}
+                    src={url+`/api/media/${uploadForm.content_link}`}
                   />
                 </div>
               </ListItem>
@@ -226,7 +233,7 @@ const Edit = ({ user, setUser }) => {
               <ListItem>
                 <video width="100%" height="240" controls>
                   <source
-                    src={`/api/media/${uploadForm.content_link}`}
+                    src={url+`/api/media/${uploadForm.content_link}`}
                     type="video/mp4"
                   />
                 </video>
@@ -235,7 +242,9 @@ const Edit = ({ user, setUser }) => {
             {uploadForm.content_type === "audio" && (
               <ListItem>
                 <audio controls style={{ display: "flex", width: "100%" }}>
-                  <source src={`/api/media/${uploadForm.content_link}`} />
+                  <source
+                    src={url+`/api/media/${uploadForm.content_link}`}
+                  />
                 </audio>
               </ListItem>
             )}

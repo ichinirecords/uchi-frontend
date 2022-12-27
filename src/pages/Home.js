@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import Map from "../components/Map";
 import HomeTab from "../components/HomeTab";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 export function Home() {
   const [approvedArtwork, setApprovedArtwork] = useState([]);
   const [backupData, setBackupData] = useState([]);
@@ -14,7 +16,7 @@ export function Home() {
   const [hideIntro, setHideIntro] = useState('');
 
   useEffect(() => {
-    fetch("/api/artwork")
+    fetch(url+"/api/artwork")
       .then((res) => res.json())
       .then((data) => {
         setApprovedArtwork(data);

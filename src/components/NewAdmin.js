@@ -3,6 +3,8 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles((theme) => ({
   form: {
     width: "50%",
@@ -28,7 +30,7 @@ const NewAdmin = ({ setCreateMode }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username.length > 0 && email.length > 0) {
-      fetch(`/api/admin`, {
+      fetch(url+`/admin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,8 +40,8 @@ const NewAdmin = ({ setCreateMode }) => {
         if (res.status === 200) {
           alert("New account created successfully");
           setCreateMode(false);
-		} else if (res.status === 400) {
-			alert("A user with this username or email address already exists")
+        } else if (res.status === 400) {
+          alert("A user with this username or email address already exists");
         } else {
           alert("Account creation was not successful");
         }

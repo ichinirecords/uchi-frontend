@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -40,7 +42,10 @@ const Reset = () => {
   let history = useHistory();
 
   useEffect(() => {
-    fetch("/api/reset" + window.location.search).then((res) => {
+    fetch(
+      url+"/api/reset" +
+        window.location.search
+    ).then((res) => {
       if (res.ok) {
         setIsValid(true);
       }
@@ -50,7 +55,7 @@ const Reset = () => {
   const handleReset = (e) => {
     e.preventDefault();
     if (newPassword === confirmPassword) {
-      fetch(`/api/admin/${userId}`, {
+      fetch(url+`/api/admin/${userId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -17,6 +17,8 @@ import UploadModalAlerts from "./UploadModalAlerts";
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles(() => ({
 	appBar: {
 		position: "relative",
@@ -165,20 +167,20 @@ const UploadModal = () => {
 				console.log(value);
 			}
 			setUploadingMessage(true);
-			fetch("/api/upload", {
-				method: "POST",
-				body: formData,
-			}).then(() => {
-				setUploadingMessage(false);
-				setSuccessAlert(true);
-				setUploadForm(initialFormValues);
-				setFile("");
-				setCoordUploadForm({ lat: "" });
-				setTimeout(function () {
-					setOpen(false);
-					setSuccessAlert(false);
-				}, 3000);
-			});
+			fetch(url+"/upload", {
+        method: "POST",
+        body: formData,
+      }).then(() => {
+        setUploadingMessage(false);
+        setSuccessAlert(true);
+        setUploadForm(initialFormValues);
+        setFile("");
+        setCoordUploadForm({ lat: "" });
+        setTimeout(function () {
+          setOpen(false);
+          setSuccessAlert(false);
+        }, 3000);
+      });
 			history.push("/");
 		} else {
 			setErrorAlert(true);

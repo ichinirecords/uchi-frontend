@@ -9,6 +9,8 @@ import ReactReadMoreReadLess from "react-read-more-read-less";
 import ReactAudioPlayer from "react-audio-player";
 import "./ArtistsStoryCards.css";
 
+const url = "https://goldfish-app-zpg5e.ondigitalocean.app";
+
 const useStyles = makeStyles({
 	root: {
 		width: "100%",
@@ -55,91 +57,91 @@ const ArtistsStoryCards = ({ approvedArtwork }) => {
 			<div className="cards-wrapper">
 				{approvedArtwork.map((artwork, index) => {
 					return (
-						<Card key={artwork.id} className={classes.root}>
-							<CardActionArea className="card-action">
-								{artwork.content_type === "image" && (
-									<CardMedia
-										className={`${classes.image} card-img`}
-										component="img"
-										alt={artwork.title}
-										height="240"
-										image={`/api/media/${artwork.content_link}`}
-										title={artwork.title}
-									/>
-								)}
-								{artwork.content_type === "video" && (
-									<video
-										className={classes.video}
-										width="100%"
-										height="240"
-										controls
-									>
-										<source
-											src={`/api/media/${artwork.content_link}`}
-											type="video/mp4"
-										/>
-									</video>
-								)}
-								{artwork.content_type === "audio" && (
-									<div className="audio-player">
-										<ReactAudioPlayer
-											className={classes.audio}
-											src={`/api/media/${artwork.content_link}`}
-											controls
-										/>
-									</div>
-								)}
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h5"
-										component="h2"
-										className={classes.title}
-									>
-										{artwork.title}
-									</Typography>
-									<Typography
-										className={classes.pos}
-										variant="body2"
-										component="p"
-									>
+            <Card key={artwork.id} className={classes.root}>
+              <CardActionArea className="card-action">
+                {artwork.content_type === "image" && (
+                  <CardMedia
+                    className={`${classes.image} card-img`}
+                    component="img"
+                    alt={artwork.title}
+                    height="240"
+                    image={url+`/api/media/${artwork.content_link}`}
+                    title={artwork.title}
+                  />
+                )}
+                {artwork.content_type === "video" && (
+                  <video
+                    className={classes.video}
+                    width="100%"
+                    height="240"
+                    controls
+                  >
+                    <source
+                      src={url+`/api/media/${artwork.content_link}`}
+                      type="video/mp4"
+                    />
+                  </video>
+                )}
+                {artwork.content_type === "audio" && (
+                  <div className="audio-player">
+                    <ReactAudioPlayer
+                      className={classes.audio}
+                      src={url+`/api/media/${artwork.content_link}`}
+                      controls
+                    />
+                  </div>
+                )}
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    className={classes.title}
+                  >
+                    {artwork.title}
+                  </Typography>
+                  <Typography
+                    className={classes.pos}
+                    variant="body2"
+                    component="p"
+                  >
                     Name: {artwork.artist_name}
-										<br />
+                    <br />
                     Country: {artwork.country}
-										<br />
+                    <br />
                     City: &nbsp;
-										{artwork.city === "undefined"
-											? "No city provided"
-											: artwork.city}
-									</Typography>
-									<Typography className={classes.text} variant="body1">
-										{artwork.content_type !== "text" && (
-											<ReactReadMoreReadLess
-												className="read-more-read-less"
-												id={index}
-												charLimit={120}
-												readMoreText={"Read more ▼"}
-												readLessText={"Read less ▲"}
-											>
-												{artwork.content_text}
-											</ReactReadMoreReadLess>
-										)}
-										{artwork.content_type === "text" && (
-											<ReactReadMoreReadLess
-												className={`${classes.text} read-more-read-less`}
-												id={index}
-												charLimit={550}
-												readMoreText={"Read more ▼"}
-												readLessText={"Read less ▲"}
-											>
-												{artwork.content_text}
-											</ReactReadMoreReadLess>
-										)}
-									</Typography>
-								</CardContent>
-							</CardActionArea>
-						</Card>
-					);
+                    {artwork.city === "undefined"
+                      ? "No city provided"
+                      : artwork.city}
+                  </Typography>
+                  <Typography className={classes.text} variant="body1">
+                    {artwork.content_type !== "text" && (
+                      <ReactReadMoreReadLess
+                        className="read-more-read-less"
+                        id={index}
+                        charLimit={120}
+                        readMoreText={"Read more ▼"}
+                        readLessText={"Read less ▲"}
+                      >
+                        {artwork.content_text}
+                      </ReactReadMoreReadLess>
+                    )}
+                    {artwork.content_type === "text" && (
+                      <ReactReadMoreReadLess
+                        className={`${classes.text} read-more-read-less`}
+                        id={index}
+                        charLimit={550}
+                        readMoreText={"Read more ▼"}
+                        readLessText={"Read less ▲"}
+                      >
+                        {artwork.content_text}
+                      </ReactReadMoreReadLess>
+                    )}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          );
 				})}
 			</div>
 		</div>
